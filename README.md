@@ -11,6 +11,7 @@
 ----Evaluation.py  模型评估方法封装\<br>  
 ----InputFn.py     模型输入方法封装\<br>  
 ----Training.py    模型训练方法封装\<br>  
+![Image text](https://github.com/qmkgrec/tftools/blob/master/Pic/tftools(1).png)
 
 ## 使用原理
 特征的配置和特征间的组合在底层委托给[tf.feature_column](https://www.tensorflow.org/api_docs/python/tf/feature_column)来完成，这个模块用起来非常方便，和tfrecords格式的训练样本也很好配合。
