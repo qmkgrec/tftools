@@ -153,13 +153,17 @@ def GetEmbeddingColumn(key, info_dict):
   combiner = info_dict.get("combiner", "mean")
   is_out = info_dict.get('is_out', True) not in ("False", "false", "0")
   group = info_dict.get('group', 'default')
+  ckpt_to_load_from = info_dict.get('ckpt_to_load_from',None)
+  tensor_name_in_ckpt = info_dict.get('tensor_name_in_ckpt',None)
 
   return key, \
          [tf.feature_column.embedding_column(         
             categorical_column=cat_col,
             dimension=dimension,
             combiner=combiner,
-            initializer=tf.initializers.uniform_unit_scaling())], is_out, group
+            initializer=tf.initializers.uniform_unit_scaling(),
+            ckpt_to_load_from=ckpt_to_load_from,
+            tensor_name_in_ckpt=tensor_name_in_ckpt)], is_out, group
 
 
 
@@ -170,10 +174,14 @@ def GetSharedEmbeddingColumn(key, info_dict):
   combiner = info_dict.get("combiner", "mean")
   is_out = info_dict.get('is_out', True) not in ("False", "false", "0")
   group = info_dict.get('group', 'default')
+  ckpt_to_load_from = info_dict.get('ckpt_to_load_from',None)
+  tensor_name_in_ckpt = info_dict.get('tensor_name_in_ckpt',None)
 
   return key, \
          tf.feature_column.shared_embedding_columns(         
             categorical_columns=cat_col,
             dimension=dimension,
             combiner=combiner,
-            initializer=tf.initializers.uniform_unit_scaling()), is_out, group
+            initializer=tf.initializers.uniform_unit_scaling(),
+            ckpt_to_load_from=ckpt_to_load_from,
+            tensor_name_in_ckpt=tensor_name_in_ckpt), is_out, group
